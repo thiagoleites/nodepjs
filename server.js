@@ -3,12 +3,20 @@ import usuariosRouter from './routes/usuarios.js';
 import categoriasRouter from './routes/categorias.js';
 import { connect } from './db/database.js';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/usuarios', usuariosRouter);
 app.use('/categorias', categoriasRouter);
 
